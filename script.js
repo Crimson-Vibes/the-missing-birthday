@@ -2,6 +2,8 @@ const dialogue = document.getElementById("dialogue");
 const choices = document.getElementById("choices");
 const floatingMessage = document.getElementById("floatingMessage");
 const chapterTag = document.querySelector(".chapter-tag");
+const bgMusic = document.getElementById("bgMusic");
+let bgMusicStarted = false;
 
 let typing = false;
 let frogsCollected = 0;

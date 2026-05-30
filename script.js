@@ -4,6 +4,16 @@ const floatingMessage = document.getElementById("floatingMessage");
 const chapterTag = document.querySelector(".chapter-tag");
 
 let typing = false;
+let frogsCollected = 0;
+let frogUnlocked = false;
+
+const frogLocations = [
+"Gift Valley",
+"Cake Disaster",
+"Mirror of Truth",
+"Jar of Tiny Good Things",
+"Secret Files"
+];
 
 const intro = [
 
@@ -372,18 +382,50 @@ They all seem suspicious.`
 
     );
 
+   choices.innerHTML = `
+
+<button onclick="openGift()">
+🎁 Box A
+</button>
+
+<button onclick="openGift()">
+🎁 Box B
+</button>
+
+<button onclick="openGift()">
+🎁 Box C
+</button>
+
+<button onclick="giftFrog()">
+🐸 Suspicious Frog
+</button>
+
+`;
+}
+
+
+function giftFrog(){
+
+    findFrog(
+    "Gift Valley"
+    );
+
+    typeText(
+
+`You found a frog hiding behind one of the gift boxes.
+
+It claims it was helping organize presents.
+
+The evidence is... inconclusive.
+
+The frog seems very proud of itself regardless.`
+
+    );
+
     choices.innerHTML = `
 
-    <button onclick="openGift()">
-    🎁 Box A
-    </button>
-
-    <button onclick="openGift()">
-    🎁 Box B
-    </button>
-
-    <button onclick="openGift()">
-    🎁 Box C
+    <button onclick="chapter4()">
+    Continue Journey
     </button>
 
     `;
@@ -468,6 +510,35 @@ What could possibly go wrong?`
     🧸 Bunbun Decoration
     </button>
 
+    <button onclick="cakeFrog()">
+🐸 Cake Frog
+</button>
+
+    `;
+}
+
+function cakeFrog(){
+
+    findFrog(
+    "Cake Disaster"
+    );
+
+    typeText(
+
+`You discovered a frog hiding inside the cake ingredients.
+
+This raises several questions.
+
+The frog refuses to answer any of them.`
+
+    );
+
+    choices.innerHTML = `
+
+    <button onclick="finishCake()">
+    Continue Cake Construction
+    </button>
+
     `;
 }
 
@@ -514,6 +585,8 @@ choices.innerHTML = `
 </button>
 
 `;
+}
+
 // =========================
 // CHAPTER 5
 // MIRROR OF TRUTH
@@ -544,6 +617,37 @@ Mostly.`
     <button onclick="useMirror()">
     🪞 Look Into Mirror
     </button>
+
+<button onclick="mirrorFrog()">
+🐸 Mirror Frog
+</button>
+    `;
+}
+
+function mirrorFrog(){
+
+    findFrog(
+    "Mirror of Truth"
+    );
+
+    typeText(
+
+`You found a frog staring into the mirror.
+
+It appears extremely pleased with its reflection.
+
+Honestly?
+
+Fair enough.`
+
+    );
+
+    choices.innerHTML = `
+
+    <button onclick="useMirror()">
+    Continue
+    </button>
+
     `;
 }
 
@@ -697,8 +801,38 @@ Welcome to the Jar of Tiny Good Things.`
     <button onclick="openJar()">
     🫙 Open Jar
     </button>
+
+<button onclick="jarFrog()">
+🐸 Jar Frog
+</button>
     `;
 }
+
+ function jarFrog(){
+
+    findFrog(
+    "Jar of Tiny Good Things"
+    );
+
+    typeText(
+
+`You found a frog folded inside the jar.
+
+How it got in there remains unknown.
+
+The frog refuses further comment.`
+
+    );
+
+    choices.innerHTML = `
+
+    <button onclick="openJar()">
+    Continue
+    </button>
+
+    `;
+}
+    
 
 function openJar(){
 
@@ -765,8 +899,39 @@ Please do not tell the carpet.`
     <button onclick="openSecretFile()">
     📁 Open File
     </button>
+
+<button onclick="fileFrog()">
+🐸 Classified Frog
+</button>
+
     `;
 }
+
+function fileFrog(){
+
+    findFrog(
+    "Secret Files"
+    );
+
+    typeText(
+
+`You discovered a highly classified frog.
+
+It possesses security clearance.
+
+You are not authorized to ask why.`
+
+    );
+
+    choices.innerHTML = `
+
+    <button onclick="openSecretFile()">
+    Continue
+    </button>
+
+    `;
+}
+    
 
 function openSecretFile(){
 
@@ -920,6 +1085,133 @@ Happy Birthday.
     </button>
     `;
 }
+
+function findFrog(location){
+
+    frogsCollected++;
+
+    showAchievement(
+    `🐸 Frog Found (${frogsCollected}/5)`
+    );
+
+    let frogComment = "";
+
+    if(frogsCollected === 1)
+        frogComment = "Interesting. A frog.";
+
+    if(frogsCollected === 2)
+        frogComment = "There appears to be a second frog.";
+
+    if(frogsCollected === 3)
+        frogComment = "This is becoming a pattern.";
+
+    if(frogsCollected === 4)
+        frogComment = "I am becoming concerned.";
+
+    if(frogsCollected === 5)
+        frogComment = "The Frog Council knows.";
+
+    bunbunThought(
+    `🐸 Frog discovered in ${location}. ${frogComment}`
+    );
+
+    if(frogsCollected >= 5){
+
+        unlockFrogCouncil();
+    }
+}
+    
+function unlockFrogCouncil(){
+
+    if(frogUnlocked) return;
+
+    frogUnlocked = true;
+
+    showAchievement(
+    "🏆 Frog Approved"
+    );
+
+    setTimeout(()=>{
+
+        choices.innerHTML += `
+
+        <button onclick="frogCouncil()">
+        🐸 Visit Frog Council
+        </button>
+
+        `;
+
+    },1000);
+}
+
+function frogCouncil(){
+
+    chapterTag.innerHTML =
+    "Secret Chapter";
+
+    createConfetti();
+
+    typeText(
+
+`You have been summoned.
+
+The Frog Council has been observing you.
+
+Quietly.
+
+From various locations.
+
+Mostly ponds.
+
+After careful consideration...
+
+The council has reached a decision.
+
+You are officially Frog Approved.
+
+This is considered a great honor.
+
+Please do not let it go to your head.
+
+The frogs are proud of you.
+
+Even the judgmental one.`
+
+    );
+
+    choices.innerHTML = `
+
+    <button onclick="returnFromCouncil()">
+    🐸 Thank The Council
+    </button>
+
+    `;
+}
+
+function returnFromCouncil(){
+
+    typeText(
+
+`The council nods.
+
+A tiny frog hands you a sticker.
+
+It simply says:
+
+"Certified Cool Human."
+
+The meeting has concluded.`
+
+    );
+
+    choices.innerHTML = `
+    <button onclick="chapter10()">
+    Continue Adventure
+    </button>
+    `;
+}
+
+
 
 choices.innerHTML = `
 <button onclick="nextDialogue()">

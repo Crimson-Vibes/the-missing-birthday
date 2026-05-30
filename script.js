@@ -91,13 +91,17 @@ function bunbunThought(text){
 
 function nextDialogue(){
 
-    if (!bgMusicStarted) {
-        bgMusic.volume = 0.35; // soft background vibe
-        bgMusic.play();
+    if(typing) return;
+
+    if(!bgMusicStarted){
+        bgMusic.volume = 0.2;
+
+        bgMusic.play().catch((err) => {
+            console.log("Music blocked:", err);
+        });
+
         bgMusicStarted = true;
     }
-
-    if(typing) return;
 
     if(introIndex < intro.length){
         typeText(intro[introIndex]);

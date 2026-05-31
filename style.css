@@ -81,9 +81,8 @@ h1{
 
     background: linear-gradient(
         145deg,
-        #F1B8D5,
-        #FD71A3,
-        #CEFFBD
+        #CEFFBD,
+        #8FE0C1
     );
     
     display:flex;

@@ -151,10 +151,10 @@ function nextDialogue(){
     if(introIndex < intro.length){
 
         setFace(intro[introIndex].face);
-
         typeText(intro[introIndex].text);
 
         introIndex++;
+
     }
     else{
 
@@ -1794,8 +1794,22 @@ As usual.`
     `;
 }
 
-choices.innerHTML = `
-<button onclick="nextDialogue()">
-Continue
-</button>
-`;
+function startGame(){
+
+    introIndex = 0;
+
+    chapterTag.innerHTML = "Prologue";
+
+    setFace(intro[0].face);
+
+    typeText(intro[0].text);
+
+    introIndex++;
+
+    choices.innerHTML = `
+    <button onclick="nextDialogue()">
+    ✨ Continue
+    </button>
+    `;
+}
+

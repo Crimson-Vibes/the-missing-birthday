@@ -3,6 +3,9 @@ const choices = document.getElementById("choices");
 const floatingMessage = document.getElementById("floatingMessage");
 const chapterTag = document.querySelector(".chapter-tag");
 const bgMusic = document.getElementById("bgMusic");
+const heartContainer = document.getElementById("hearts");
+const balloonArea = document.getElementById("balloons");
+
 let chapter8Completed = false;
 let bgMusicStarted = false;
 
@@ -23,6 +26,9 @@ function unlockInput() {
     choices.style.opacity = "1";
 }
 
+function returnToMainStory() {
+    chapter9();
+}
 
 let frogsCollected = 0;
 let frogUnlocked = false;
@@ -234,6 +240,29 @@ piece.remove();
 }
 }
 
+// ================== HEARTS & BALLOONS ==================
+function startHeartsAndBalloons() {
+  setInterval(() => {
+    // HEART
+    const heart = document.createElement('span');
+    heart.textContent = '💖';
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.fontSize = Math.random() * 10 + 15 + 'px';
+    heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+    heartContainer.appendChild(heart);
+    setTimeout(() => heart.remove(), 7000);
+
+    // BALLOON
+    const b = document.createElement('span');
+    b.textContent = '🎈';
+    b.style.left = Math.random() * 100 + 'vw';
+    b.style.fontSize = Math.random() * 30 + 30 + 'px';
+    balloonArea.appendChild(b);
+    setTimeout(() => b.remove(), 13000);
+
+  }, 500);
+}
+
 function startAdventure(){
 
 if(!bgMusicStarted){
@@ -253,7 +282,7 @@ bunbunThought(
 );
 
 typeText(
-"Excellent.The carpet appears to be functioning.This is surprising.",
+"Excellent. The carpet appears to be functioning. This is really surprising.",
 ()=>{
 
 choices.innerHTML = `
@@ -399,36 +428,21 @@ showAchievement(
 
 typeText(
 
-` Hmm.
-Let's review the evidence.
-Multiple witnesses remembered today.
-Birthday wishes have been spotted everywhere.
-Someone may or may not have spent an alarming amount of time creating an entire birthday adventure.
-The suspect is currently standing in the middle of said adventure.
-And yet...
-You continue to insist that today is just another ordinary day.
-A fascinating argument.
-Unfortunately...
-The evidence is stacking up.
-After a very serious investigation...
-And several completely unnecessary meetings...
-The Birthday Investigation Team has reached a conclusion.
+` ---
+Hmm.
+You still insist it’s just another day. Interesting claim.
+After a careful investigation (and a few unnecessary dramatic pauses), the conclusion is simple:
+The birthday was never missing.
+Just a little buried under tired days, overthinking, and everything life kept tossing in.
+But it didn’t leave.
+It stayed. Quietly. Patiently. Waiting to be noticed.
 
-The birthday was never actually missing.
-It was simply buried.
-Under responsibilities. Overthinking. Tired days.
-And all the little things life threw at you lately.
-But despite all that...
-It was still here.
-Waiting for someone to notice it.
-It was still here. Waiting for someone to notice it.
+Case status: found.
+Suspect: already inside the celebration.
+Verdict: overdue joy.
 
-Case status:
-Birthday located.
-Suspect identified.
-Celebration recommended.
-
-Case closed. `
+Case closed. 🎂
+ `
 
 );
 
@@ -549,15 +563,11 @@ bunbunThought(
 
 typeText(
 
-`To celebrate the successful recovery of your birthday...
-I decided to bake you a cake.
-Unfortunately, I have never baked a cake before.
-Or seen a cake being baked.
-Or read a cake recipe.
-This was probably a mistake.
-But we're committed now.
-Please choose a cake.
-Together, we shall make questionable decisions.`
+`To celebrate your birthday being officially recovered… I thought I’d bake you a cake.
+Important detail: I have no experience baking cakes. At all. This may or may not be a crime.
+But we’re committed now.
+So please choose a cake.
+And let’s make slightly questionable decisions together. 🎂`
 );
 
 choices.innerHTML = `
@@ -629,8 +639,6 @@ typeText(
 Technically.
 It leans slightly to the left.
 One layer appears to be floating.
-Nobody knows where the glitter came from.
-The frosting has achieved sentience.
 Also...
 I may have eaten half of the frosting during construction.
 In my defense,
@@ -639,7 +647,6 @@ quality control is important.
 But...
 it was made especially for you.
 So despite several structural concerns...
-and at least three violations of basic baking principles...
 I think it's perfect.
 After all, birthdays aren't about perfect cakes.
 They're about celebrating wonderful people.
@@ -673,14 +680,9 @@ typeText(
 Don't worry.
 A very rare magical artifact.
 Most mirrors show your reflection.
-
-This one only reveals nice things.
 This one shows the things that make you special.
-
 Which is considerably more useful.
-Probably.
-Anyway.
-Let's see what it has to say.`
+So let's see what it has to say.`
 
 );
 
@@ -742,8 +744,6 @@ const truth = truths[Math.floor(Math.random()*truths.length)];
 typeText(
 `The Mirror of Truth says:
 ...
-...
-...
 Loading...
 Please wait.
 ...
@@ -753,18 +753,17 @@ Nothing.
 *Bunbun taps it harder.*
 Nothing.
 *Bunbun smacks it.*
-
 🪞💥
 
 The mirror flickers to life.
-Bunbun nods.
+*Bunbun nods.*
 "Yep. That usually works."
 
 The mirror says:
 
 "${truth}"
 
-Bunbun looks at the mirror, then at you.*
+*Bunbun looks at the mirror, then at you.*
 "Yeah… I approve this message." `
 , () => {
 
@@ -797,8 +796,6 @@ typeText(
 `Welcome to the Wheel of Chaos.
 
 I have absolutely no idea what happens next.
-Important notice:
-This system is not certified, tested, or emotionally stable.
 
 If anything goes wrong,
 please pretend it was intentional.
@@ -849,9 +846,8 @@ You received:
 
 Bunbun squints at it.
 "...I don't remember agreeing to this result."
-Please do not ask me how this works.
-I barely understand it myself.
-Bunbun is now pretending this was intentional.`,
+So please do not ask me how this works.
+I barely understand it myself.`,
         () => {
 
             choices.innerHTML = `
@@ -934,12 +930,8 @@ typeText(
 It refuses.
 It simply vibrates slightly.
 
-Bunbun stares at it.
+*Bunbun stares at it.*
 "...this is personal now."
-He taps it gently.
-Nothing happens.
-He taps it again.
-Still nothing.
 He pauses.
 He very respectfully smashes the jar. 🫙💥
 A tiny note falls out.`
@@ -995,16 +987,14 @@ typeText(
 Bunbun is standing very still.
 That is never a good sign.
 "...don’t open it."
-"...actually, no. I’m serious. Don’t open it."
 "...why is it even here?"
 Bunbun takes a step closer.
 The air feels heavier.
 "I am not emotionally prepared for what is inside that file."
-"...and I definitely did not approve its placement here !! "
+"...and I definitely did NOT approve its placement here !! "
 He pauses.
 Slowly turns his head.
-"...I am going to have a very serious conversation with the carpet after this."
-"...no. Not a conversation. An argument."`
+"...I am going to have a very serious conversation with the carpet after this."`
 
 );
 
@@ -1048,28 +1038,25 @@ choices.innerHTML = `
 function openSecretFile(){
 
 typeText(
-
 `Bunbun suddenly appears in front of the file.
 "Wait."
-"No."
 "No no no no."
 He points at it like it personally offended him.
 "...why is this still here?"
-He pauses.
-Looks at you.
+Bunbun looks at you.
 "I know what you're going to do."
 "You’re going to ignore me."
 He sighs.
 "...fine."
-He steps aside very dramatically.
-Like this is your fault.`
+He steps aside very dramatically.`,
+() => {
+    choices.innerHTML = `
+        <button onclick="revealLetter()">
+        📖 Open File
+        </button>
+    `;
+}
 );
-
-choices.innerHTML = `
-   <button onclick="revealLetter()">
-   📖 Open File
-   </button>
-`;
 }
 
 function revealLetter(){
@@ -1084,56 +1071,27 @@ He just doesn’t want to admit it.
 ...
 It says:
 
-"Hey."
-So you opened it.
-I’m not even surprised.
-Honestly, I think I would’ve been more concerned if you *didn’t* open it.
-That would’ve been suspicious behaviour.
-...
-Anyways.
-I’m not very good at writing serious letters.
-So if this starts sounding weird, that’s normal.
-It’s me trying my best.
-Which is… already a problem.
-...
-This whole thing we’ve been doing?
-The chaos.The choices.
-The frogs that keep showing up where they absolutely should not be.
-Yeah.
-That wasn’t accidental.
-Okay, some of it was accidental.
-A *concerning amount* of it was accidental.
-But still. It became something.
-...
-I think I built all of this thinking it would just be fun.
-And it was.
-But somewhere in between all the wheels and jars and questionable decisions…
-it turned into something else too.
-Not big. Not dramatic. Just… something that exists now. Because you went through it.
-...
-And I guess that’s the part I didn’t plan for.
-That you would actually be here. 
-Reading this.
-Not skipping it. Not closing it.
-Just… here.
-...
-So yeah.
-I’m not going to make this emotional.
-That’s not really my style.
-But I will say this properly.
-Once.
-...
-I’m glad you came this far.
-That’s it.
-Just that.
-Also… I guess I’m glad I got “appointed” for this task.
-I’m never doing this again.
-I only did it because… you’re special. Don’t make me regret saying that.
-...
-Okay.
-Now please stop opening classified things.
-I am running out of files.
-— Bunbun 🐰`,
+“Hey.”
+
+So you opened it. I’m not even surprised. Honestly, I’d be more worried if you didn’t. That would’ve been suspicious.
+
+Anyways, I’m not great at serious letters, so if this gets a bit weird, that’s just me trying my best.
+
+This whole thing we’ve been doing, the chaos, the choices, the frogs showing up where they absolutely shouldn’t, yeah… that wasn’t all accidental. Some of it was, yes. A concerning amount, actually. But it became something anyway.
+
+I thought I was just building something fun. And it was. But somewhere between all the nonsense, it turned into something else too. Not big. Not dramatic. Just something that exists now because you went through it.
+
+And I don’t think I planned for that part. That you’d actually be here. Reading this. Not skipping it. Just here.
+
+So I’ll say it properly, once.
+
+I’m glad you made it this far. That’s it. Just that.
+
+Also, I’m kind of glad I got “appointed” for this task. I’m never doing this again. I only did it because… you’re special. Don’t make me regret saying that.
+
+Okay. Now please stop opening classified things. I’m running out of files.
+
+— Bunbun 🐰 `,
 () => {
 
 chapter8Completed = true;
@@ -1142,7 +1100,7 @@ if (frogUnlocked) {
 
     choices.innerHTML = `
         <button onclick="chapter9()">
-        Continue
+        Continue Adventure 
         </button>
 
         <button onclick="frogCouncil()">
@@ -1155,7 +1113,7 @@ else {
 
     choices.innerHTML = `
         <button onclick="chapter9()">
-        Continue
+        Continue Adventure
         </button>
     `;
 
@@ -1217,11 +1175,9 @@ Bunbun is staring at you in silence.
 This is worse than shouting.
 "...why."
 "I specifically said not to do that.."
-It Literally Said Not To !!
-*He pauses*
-"... I Even Asked you Nicely."
+It literally said NOT to !!
+"... I even asked you nicely."
 *Takes a breath.*
-Unbelievable.
 "... you know what?"
 "Enough.."
 "No more buttons for you."`
@@ -1256,8 +1212,7 @@ typeText(
 `
 I know you didn’t think this would turn into anything like this.
 
-But then you pressed the red button.
-And because of that… the carpet has finally landed. 
+But the carpet has finally landed. 
 So I guess… this is where it ends.
 
 And honestly…
@@ -1283,12 +1238,10 @@ And after spending this entire adventure with you...
 I think you know it too.
 
 So whether today was amazing...
-Or messy...
-Or ordinary...
+Or messy... Or ordinary...
 Or somewhere in between...
 
 I hope you found at least one thing that made you smile.
-One thing that made the day feel a little lighter.
 One tiny reminder that even on the busiest days, you deserve moments of happiness too.
 
 So here's your final achievement:
@@ -1522,14 +1475,18 @@ A frog whispers something about snacks.
 The council ignores him.
 As usual.`,
         () => {
-            choices.innerHTML = `
-                <button onclick="chapter10()">
-                    Continue Adventure
-                </button>
-            `;
+           choices.innerHTML = `
+  <button onclick="returnToMainStory()">
+    Return to Journey
+  </button>
+`;
         }
     );
 }
+
+window.addEventListener("load", () => {
+    startHeartsAndBalloons();
+});
 
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("choices").innerHTML = `
